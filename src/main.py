@@ -21,7 +21,10 @@ class PasswordGeneratorApp(QWidget):
     def initUI(self):
         """Initialize the User Interface"""
         self.setWindowTitle("Random Password Generator")
-        self.setGeometry(200, 200, 400, 400)  # Adjusted window size
+
+        # Set fixed minimum window size, but allow resizing
+        self.setMinimumSize(400, 400)
+        self.setGeometry(200, 200, 400, 400)  # Adjusted initial window size
 
         layout = QVBoxLayout()
 
