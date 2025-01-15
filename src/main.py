@@ -11,6 +11,7 @@ from PyQt5.QtWidgets import (
     QCheckBox,
     QSpinBox,
 )
+from PyQt5.QtCore import Qt
 
 
 class PasswordGeneratorApp(QWidget):
@@ -22,36 +23,58 @@ class PasswordGeneratorApp(QWidget):
         """Initialize the User Interface"""
         self.setWindowTitle("Random Password Generator")
 
+        # set Blue colour in label
+        self.setStyleSheet("background-color: #f0f0f0;")
+
         # Set fixed minimum window size, but allow resizing
         self.setMinimumSize(400, 400)
         self.setGeometry(200, 200, 400, 400)  # Adjusted initial window size
 
         layout = QVBoxLayout()
 
+        # Create a stylesheet for the checkboxes
+        checkbox_style = "QCheckBox { font-size: 14px; }"
+        QLabel_style = "QLabel { font-size: 16px; }"
+        QSpinBox_style = "QSpinBox { font-size: 16px; }"
+        QLineEdit_style = "QLineEdit { font-size: 16px; }"
+
         self.label = QLabel("Generated Password:")
+        self.label.setStyleSheet(QLabel_style)
         layout.addWidget(self.label)
 
         self.password_field = QLineEdit()
+        self.password_field.setStyleSheet(QLineEdit_style)
         self.password_field.setReadOnly(True)
         layout.addWidget(self.password_field)
 
         self.length_label = QLabel("Password Length:")
+        self.length_label.setStyleSheet(QLabel_style)
         self.length_spinbox = QSpinBox()
-        self.length_spinbox.setRange(8, 64)
+        self.length_spinbox.setStyleSheet(QSpinBox_style)
+        self.length_spinbox.setRange(20, 64)
         self.length_spinbox.setValue(12)
         layout.addWidget(self.length_label)
         layout.addWidget(self.length_spinbox)
 
         # Adding checkboxes for user selection
         self.include_numbers = QCheckBox("Include Numbers")
+        self.include_numbers.setStyleSheet(checkbox_style)
         self.include_lowercase = QCheckBox("Include Lowercase Characters")
+        self.include_lowercase.setStyleSheet(checkbox_style)
         self.include_uppercase = QCheckBox("Include Uppercase Characters")
+        self.include_uppercase.setStyleSheet(checkbox_style)
         self.include_symbols = QCheckBox("Include Symbols")
+        self.include_symbols.setStyleSheet(checkbox_style)
         self.include_special_characters = QCheckBox("Include Special Characters")
+        self.include_special_characters.setStyleSheet(checkbox_style)
         self.no_similar = QCheckBox("No Similar Characters")
+        self.no_similar.setStyleSheet(checkbox_style)
         self.no_duplicates = QCheckBox("No Duplicate Characters")
+        self.no_duplicates.setStyleSheet(checkbox_style)
         self.no_sequential = QCheckBox("No Sequential Characters")
+        self.no_sequential.setStyleSheet(checkbox_style)
         self.begin_with_letter = QCheckBox("Begin With A Letter")
+        self.begin_with_letter.setStyleSheet(checkbox_style)
 
         # Add checkboxes to the layout
         layout.addWidget(self.include_numbers)
@@ -66,6 +89,9 @@ class PasswordGeneratorApp(QWidget):
 
         # Generate button
         self.generate_button = QPushButton("Generate Password")
+        self.generate_button.setStyleSheet(
+            "font-size: 16px; font-weight: bold; background-color: #4CAF50; color: white;"
+        )
         self.generate_button.clicked.connect(self.generate_password)
         layout.addWidget(self.generate_button)
 
